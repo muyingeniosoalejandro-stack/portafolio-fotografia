@@ -3,100 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alejandro Gallegos - Portafolio</title>
+    <title>Es lo que somos - Alejandro Gallegos</title>
     <style>
-        /* Importamos tu tipografía elegante original */
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap');
-
-        /* =========================================
-           DISEÑO BASE, FONDO OSCURO Y FUENTE
-        ========================================= */
-        body { 
-          background-color: #666666; 
-          color: #f2f2f2; 
-          font-family: 'Cormorant Garamond', Georgia, serif; 
-          margin: 0; 
-          padding: 0; 
-        }
-
-        /* TÍTULO PRINCIPAL DE LA PÁGINA */
-        h1.nombre-sitio {
-          text-align: center;
-          font-size: 3.5rem;
-          font-weight: 400;
-          letter-spacing: 3px;
-          margin: 50px 0 10px 0;
-        }
-
-        nav { 
-          text-align: center; 
-          padding: 10px 0 30px 0; 
-          border-bottom: 1px solid #555; 
-          margin-bottom: 40px; 
-        }
-
-        nav a { 
-          color: #f2f2f2; 
-          text-decoration: none; 
-          margin: 0 15px; 
-          font-size: 1.5rem; /* Letra del menú más grande */
-          letter-spacing: 1px; 
-        }
-
-        nav a:hover { 
-          color: #bbbbbb; 
-        }
-
-        .contenedor-revista { 
-          max-width: 1200px; 
-          margin: 0 auto; 
-          padding: 0 20px 60px 20px; 
-        }
-
+        body { background-color: #666666; color: #f2f2f2; font-family: 'Cormorant Garamond', Georgia, serif; margin: 0; padding: 0; }
+        h1.nombre-sitio { text-align: center; font-size: 3.5rem; font-weight: 400; letter-spacing: 3px; margin: 50px 0 10px 0; }
+        nav { text-align: center; padding: 10px 0 30px 0; border-bottom: 1px solid #555; margin-bottom: 40px; }
+        nav a { color: #f2f2f2; text-decoration: none; margin: 0 15px; font-size: 1.5rem; letter-spacing: 1px; }
+        nav a:hover { color: #bbbbbb; }
+        .contenedor-revista { max-width: 1200px; margin: 0 auto; padding: 0 20px 60px 20px; }
         .fila-revista { display: flex; align-items: center; gap: 40px; margin-bottom: 60px; }
-        .fila-inversa { flex-direction: row-reverse; }
         .fila-doble-foto { display: flex; gap: 20px; margin-bottom: 60px; }
-        
-        .bloque-texto { 
-          flex: 1; 
-          font-size: 1.35rem; /* Letra de los textos más grande y legible */
-          line-height: 1.7; 
-          text-align: justify; 
-        }
-
+        .bloque-texto { flex: 1; font-size: 1.35rem; line-height: 1.7; text-align: justify; }
         .bloque-foto { flex: 1; }
-        
-        .foto-item { position: relative; display: block; overflow: hidden; }
-        .foto-item img { width: 100%; height: auto; display: block; }
-        
-        .firma-flotante { 
-          position: absolute; bottom: 20px; right: 20px; 
-          color: #ffffff; font-family: 'Cormorant Garamond', serif; 
-          font-size: 18px; letter-spacing: 1px; opacity: 0; 
-          transition: opacity 0.4s ease; pointer-events: none; 
-          text-shadow: 1px 1px 4px rgba(0,0,0,0.7); 
-        }
+        .foto-item { position: relative; display: block; overflow: hidden; cursor: pointer; }
+        .foto-item img { width: 100%; height: auto; display: block; transition: transform 0.3s; }
+        .foto-item:hover img { transform: scale(1.02); }
+        .firma-flotante { position: absolute; bottom: 20px; right: 20px; color: #ffffff; font-family: 'Cormorant Garamond', serif; font-size: 18px; letter-spacing: 1px; opacity: 0; transition: opacity 0.4s ease; pointer-events: none; text-shadow: 1px 1px 4px rgba(0,0,0,0.7); }
         .foto-item:hover .firma-flotante { opacity: 1; }
-
-        #galeria-aleatoria { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 40px; }
-        
-        .boton-contacto { 
-          display: inline-block; margin-top: 20px; padding: 10px 20px; 
-          border: 1px solid #f2f2f2; color: #f2f2f2; text-decoration: none; 
-          transition: all 0.3s ease; font-size: 1.2rem;
-        }
-        .boton-contacto:hover { background-color: #f2f2f2; color: #666666; }
-
-        @media (max-width: 768px) { 
-          .fila-revista, .fila-inversa, .fila-doble-foto, #galeria-aleatoria { flex-direction: column; grid-template-columns: 1fr; gap: 20px; margin-bottom: 40px; } 
-        }
+        .lightbox { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(30,30,30,0.95); text-align: center; }
+        .lightbox img { max-height: 90vh; max-width: 90vw; margin-top: 5vh; object-fit: contain; }
+        .lightbox-cerrar { position: absolute; top: 20px; right: 40px; color: #f2f2f2; font-size: 40px; cursor: pointer; user-select: none; }
+        .lightbox-prev, .lightbox-next { cursor: pointer; position: absolute; top: 50%; padding: 16px; margin-top: -30px; color: #f2f2f2; font-weight: bold; font-size: 40px; transition: 0.3s; user-select: none; }
+        .lightbox-prev { left: 20px; } .lightbox-next { right: 20px; }
+        .lightbox-prev:hover, .lightbox-next:hover, .lightbox-cerrar:hover { color: #999; }
+        @media (max-width: 768px) { .fila-revista, .fila-doble-foto { flex-direction: column; gap: 20px; margin-bottom: 40px; } }
     </style>
 </head>
 <body>
-
-    <!-- Aquí está tu nombre de regreso -->
     <h1 class="nombre-sitio">ALEJANDRO GALLEGOS</h1>
-
     <nav>
         <a href="index.html">Inicio</a>
         <a href="pecera.html">Proyecto</a>
@@ -104,29 +39,56 @@
         <a href="caras.html">Ensayo</a>
         <a href="biografia.html">Biografía</a>
     </nav>
-
     <div class="contenedor-revista">
-        
         <div class="fila-revista">
-            <div class="bloque-texto">
-                <p>Las expresiones de nuestros rostros son la parte más externa de nuestro ser. Están ahí para comunicarnos, para acercarnos o alejarnos; simplemente existen para hacernos testigos. Somos lo que somos. El rostro es la identidad del individuo: delata nuestra raza, nuestra edad, nuestros gustos, nuestra salud. Es una carta biológica y antropológica de lo que somos y de lo que nos rodea.</p>
-            </div>
-            <div class="bloque-foto foto-item">
-                <img src="caras/cara-01.webp" alt="Cara">
-                <div class="firma-flotante">Alejandro Gallegos</div>
-            </div>
+            <div class="bloque-texto"><p>Las expresiones de nuestros rostros son la parte más externa de nuestro ser. Están ahí para comunicarnos, para acercarnos o alejarnos; simplemente existen para hacernos testigos. Somos lo que somos. El rostro es la identidad del individuo: delata nuestra raza, nuestra edad, nuestros gustos, nuestra salud. Es una carta biológica y antropológica de lo que somos y de lo que nos rodea.</p></div>
+            <div class="bloque-foto foto-item"><img src="caras/cara-01.webp" alt="Cara"><div class="firma-flotante">Alejandro Gallegos</div></div>
         </div>
-
         <div class="fila-doble-foto">
             <div class="bloque-foto foto-item"><img src="caras/cara-02.webp" alt="Cara"><div class="firma-flotante">Alejandro Gallegos</div></div>
             <div class="bloque-foto foto-item"><img src="caras/cara-03.webp" alt="Cara"><div class="firma-flotante">Alejandro Gallegos</div></div>
         </div>
-
         <div class="fila-doble-foto">
             <div class="bloque-foto foto-item"><img src="caras/cara-04.webp" alt="Cara"><div class="firma-flotante">Alejandro Gallegos</div></div>
             <div class="bloque-foto foto-item"><img src="caras/cara-05.webp" alt="Cara"><div class="firma-flotante">Alejandro Gallegos</div></div>
         </div>
-
+        <div class="fila-doble-foto">
+            <div class="bloque-foto foto-item"><img src="caras/cara-06.webp" alt="Cara"><div class="firma-flotante">Alejandro Gallegos</div></div>
+            <div class="bloque-foto foto-item"><img src="caras/cara-07.webp" alt="Cara"><div class="firma-flotante">Alejandro Gallegos</div></div>
+        </div>
+        <div class="fila-doble-foto">
+            <div class="bloque-foto foto-item"><img src="caras/cara-08.webp" alt="Cara"><div class="firma-flotante">Alejandro Gallegos</div></div>
+            <div class="bloque-foto foto-item"><img src="caras/cara-09.webp" alt="Cara"><div class="firma-flotante">Alejandro Gallegos</div></div>
+        </div>
+        <div class="fila-doble-foto">
+            <div class="bloque-foto foto-item"><img src="caras/cara-10.webp" alt="Cara"><div class="firma-flotante">Alejandro Gallegos</div></div>
+            <div class="bloque-foto foto-item"><img src="caras/cara-11.webp" alt="Cara"><div class="firma-flotante">Alejandro Gallegos</div></div>
+        </div>
+        <div class="fila-doble-foto">
+            <div class="bloque-foto foto-item"><img src="caras/cara-12.webp" alt="Cara"><div class="firma-flotante">Alejandro Gallegos</div></div>
+            <div class="bloque-foto foto-item"><img src="caras/cara-13.webp" alt="Cara"><div class="firma-flotante">Alejandro Gallegos</div></div>
+        </div>
+        <div class="fila-doble-foto">
+            <div class="bloque-foto foto-item" style="flex: 0.5;"><img src="caras/cara-14.webp" alt="Cara"><div class="firma-flotante">Alejandro Gallegos</div></div>
+        </div>
     </div>
+    <!-- Visor -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-cerrar" onclick="cerrarLightbox()">&times;</span>
+        <span class="lightbox-prev" onclick="cambiarFoto(-1)">&#10094;</span>
+        <span class="lightbox-next" onclick="cambiarFoto(1)">&#10095;</span>
+        <img id="lightbox-img" src="">
+    </div>
+    <script>
+        let indexActual = 0; let imagenesGaleria = [];
+        window.addEventListener('DOMContentLoaded', () => {
+            const imgs = document.querySelectorAll('.foto-item img');
+            imgs.forEach((img, index) => { imagenesGaleria.push(img.src); img.onclick = () => abrirLightbox(index); });
+        });
+        function abrirLightbox(index) { indexActual = index; document.getElementById('lightbox').style.display = 'block'; document.getElementById('lightbox-img').src = imagenesGaleria[indexActual]; }
+        function cerrarLightbox() { document.getElementById('lightbox').style.display = 'none'; }
+        function cambiarFoto(direccion) { indexActual += direccion; if (indexActual >= imagenesGaleria.length) indexActual = 0; if (indexActual < 0) indexActual = imagenesGaleria.length - 1; document.getElementById('lightbox-img').src = imagenesGaleria[indexActual]; }
+        document.addEventListener('keydown', function(event) { if (document.getElementById('lightbox').style.display === 'block') { if (event.key === 'Escape') cerrarLightbox(); if (event.key === 'ArrowRight') cambiarFoto(1); if (event.key === 'ArrowLeft') cambiarFoto(-1); } });
+    </script>
 </body>
 </html>
